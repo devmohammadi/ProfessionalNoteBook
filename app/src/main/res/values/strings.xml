@@ -13,4 +13,10 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="professionalnotebook">ProfessionalNoteBook</string>
     <string name="login_with">Login With</string>
+    <string name="email">Email</string>
+    <string name="sort_by">Sort by</string>
+    <string name="time">13 : 40 pm 1399/08/29</string>
+    <string name="this_is_title_note">this is title note</string>
+    <string name="descriptionNote">this is description for note.this is description for note.this is description for note.this is description for note.this is description for note.this is description for note.this is description for note.</string>
+
 </resources>

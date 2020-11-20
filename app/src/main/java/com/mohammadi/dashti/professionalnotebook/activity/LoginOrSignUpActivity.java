@@ -41,7 +41,7 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
 
         signup_fragment_tv.setOnClickListener(this);
         login_fragment_tv.setOnClickListener(this);
-        login_fragment_tv.setTextSize(18);
+        login_fragment_tv.setTextSize(15);
 
 
     }
@@ -61,7 +61,7 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
 
                 signup_fragment_tv.setTextColor(Color.BLACK);
                 login_fragment_tv.setTextColor(Color.GRAY);
-                login_fragment_tv.setTextSize(18);
+                login_fragment_tv.setTextSize(15);
                 signup_fragment_tv.setTextSize(35);
 
                 fragment = new SignUpFragment();
@@ -74,7 +74,7 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
                 signup_fragment_tv.setTextColor(Color.GRAY);
                 login_fragment_tv.setTextColor(Color.BLACK);
                 login_fragment_tv.setTextSize(35);
-                signup_fragment_tv.setTextSize(18);
+                signup_fragment_tv.setTextSize(15);
                 fragment = new LoginFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container_id, fragment);
