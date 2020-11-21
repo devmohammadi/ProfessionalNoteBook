@@ -32,7 +32,8 @@
                     android:layout_height="wrap_content"
                     android:background="@color/BackgroundNight"
                     android:hint="@string/email_address"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/etEmail"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -45,7 +46,8 @@
                     android:layout_height="wrap_content"
                     android:background="@color/BackgroundNight"
                     android:hint="@string/name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:id="@+id/etName"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +61,8 @@
                     android:layout_height="wrap_content"
                     android:background="@color/BackgroundNight"
                     android:hint="@string/password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:id="@+id/etPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -75,7 +78,8 @@
                     android:layout_marginBottom="10dp"
                     android:background="@color/BackgroundNight"
                     android:hint="@string/confirm_password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:id="@+id/etConfirmPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -92,7 +96,8 @@
                 android:paddingRight="30dp"
                 android:text="@string/sign_up"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:id="@+id/tvSignUp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,6 +109,17 @@
 
 
         </LinearLayout>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/clView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
