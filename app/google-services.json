@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "779757435265",
+    "firebase_url": "https://professionalnotebook.firebaseio.com",
+    "project_id": "professionalnotebook",
+    "storage_bucket": "professionalnotebook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779757435265:android:53a15122556b6baaf69080",
+        "android_client_info": {
+          "package_name": "com.mohammadi.dashti.professionalnotebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779757435265-vqk5j24dhuiockhmbhet5v0ssdbqol6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJJtoOoXxvjbyuxhCxg5j0LlUAwD1mNKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779757435265-vqk5j24dhuiockhmbhet5v0ssdbqol6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
