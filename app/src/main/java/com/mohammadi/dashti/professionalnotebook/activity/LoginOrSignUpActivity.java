@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.mohammadi.dashti.professionalnotebook.R;
 import com.mohammadi.dashti.professionalnotebook.fragment.LoginFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.SignUpFragment;
@@ -51,6 +53,15 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
         transaction.replace(R.id.fragment_container_id , signUpFragment);
         transaction.commit();
 
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(LoginOrSignUpActivity.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            finish();
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
