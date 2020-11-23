@@ -17,11 +17,14 @@ import com.mohammadi.dashti.professionalnotebook.R;
 import com.mohammadi.dashti.professionalnotebook.fragment.LoginFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.SignUpFragment;
 
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.LOGIN_FRAGMENT;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SIGN_UP_FRAGMENT;
+
 public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView signup_fragment_tv;
-    TextView login_fragment_tv;
-    FrameLayout fragment_container_id;
+    TextView signUp;
+    TextView login;
+    FrameLayout frameLayout;
 
     FragmentTransaction fragmentTransaction;
     Fragment fragment;
@@ -30,30 +33,43 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_or_sign_up);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-        signup_fragment_tv = findViewById(R.id.signup_fragment_tv);
-        login_fragment_tv = findViewById(R.id.login_fragment_tv);
-        fragment_container_id = findViewById(R.id.fragment_container_id);
-
-
-        signup_fragment_tv.setTextColor(Color.BLACK);
-        login_fragment_tv.setTextColor(Color.GRAY);
-        handelFragment(new  SignUpFragment());
+        signUp = findViewById(R.id.tvSignUp);
+        login = findViewById(R.id.tvLogin);
+        frameLayout = findViewById(R.id.flContainer);
 
 
-        signup_fragment_tv.setOnClickListener(this);
-        login_fragment_tv.setOnClickListener(this);
-        login_fragment_tv.setTextSize(15);
+        if (SIGN_UP_FRAGMENT) {
+            signUp.setTextColor(Color.BLACK);
+            login.setTextColor(Color.GRAY);
+            login.setTextSize(15);
+            handelFragmentSignUp(new SignUpFragment());
+        }
+        if (LOGIN_FRAGMENT) {
+            signUp.setTextColor(Color.GRAY);
+            login.setTextColor(Color.BLACK);
+            signUp.setTextSize(15);
+            handelFragmentLogin(new LoginFragment());
+        }
 
+        signUp.setOnClickListener(this);
+        login.setOnClickListener(this);
 
     }
 
-    private void handelFragment(SignUpFragment signUpFragment) {
+    private void handelFragmentSignUp(SignUpFragment signUpFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container_id , signUpFragment);
+        transaction.replace(R.id.flContainer, signUpFragment);
         transaction.commit();
-
     }
+
+    private void handelFragmentLogin(LoginFragment loginFragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.flContainer, loginFragment);
+        transaction.commit();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -68,27 +84,27 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.signup_fragment_tv:
+            case R.id.tvSignUp:
 
-                signup_fragment_tv.setTextColor(Color.BLACK);
-                login_fragment_tv.setTextColor(Color.GRAY);
-                login_fragment_tv.setTextSize(15);
-                signup_fragment_tv.setTextSize(35);
+                signUp.setTextColor(Color.BLACK);
+                login.setTextColor(Color.GRAY);
+                login.setTextSize(15);
+                signUp.setTextSize(35);
 
                 fragment = new SignUpFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container_id, fragment);
+                fragmentTransaction.replace(R.id.flContainer, fragment);
                 fragmentTransaction.commit();
                 break;
 
-            case R.id.login_fragment_tv:
-                signup_fragment_tv.setTextColor(Color.GRAY);
-                login_fragment_tv.setTextColor(Color.BLACK);
-                login_fragment_tv.setTextSize(35);
-                signup_fragment_tv.setTextSize(15);
+            case R.id.tvLogin:
+                signUp.setTextColor(Color.GRAY);
+                login.setTextColor(Color.BLACK);
+                login.setTextSize(35);
+                signUp.setTextSize(15);
                 fragment = new LoginFragment();
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container_id, fragment);
+                fragmentTransaction.replace(R.id.flContainer, fragment);
                 fragmentTransaction.commit();
                 break;
 

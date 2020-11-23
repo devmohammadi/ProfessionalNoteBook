@@ -14,8 +14,6 @@
         <activity android:name=".activity.UserAccountActivity" />
         <activity android:name=".activity.MainActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.MainActivity">
-
-
         </activity>
         <activity
             android:name=".activity.SplashScreenActivity"

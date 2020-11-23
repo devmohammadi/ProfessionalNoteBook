@@ -62,13 +62,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         dashti.setAnimation(bottomAnimation);
 
         //Splash Screen
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, LoginOrSignUpActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(SplashScreenActivity.this, LoginOrSignUpActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            finish();
         }, SPLASH_TIME_OUT);
 
     }

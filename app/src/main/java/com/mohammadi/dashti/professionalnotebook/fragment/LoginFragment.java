@@ -2,105 +2,140 @@ package com.mohammadi.dashti.professionalnotebook.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
-
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.mohammadi.dashti.professionalnotebook.R;
+import com.mohammadi.dashti.professionalnotebook.activity.LoginOrSignUpActivity;
 import com.mohammadi.dashti.professionalnotebook.activity.MainActivity;
+
+import java.util.Objects;
+
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.LOGIN_FRAGMENT;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.LOGIN_SIGN_UP_DELAY;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SIGN_UP_FRAGMENT;
 
 
 public class LoginFragment extends Fragment {
 
     private TextInputEditText email;
     private TextInputEditText password;
-    private TextView login;
-    private FirebaseAuth mAuth;
+
+
     private CoordinatorLayout coordinatorLayout;
+
     private ProgressDialog progressDialog;
 
+    private FirebaseAuth mAuth;
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_login, container, false);
 
         email = view.findViewById(R.id.etEmail);
         password = view.findViewById(R.id.etPassword);
-        login = view.findViewById(R.id.tvLogin);
+        TextView login = view.findViewById(R.id.tvLogin);
         coordinatorLayout = view.findViewById(R.id.clView);
+
         mAuth = FirebaseAuth.getInstance();
 
+        progressDialog = new ProgressDialog(getContext());
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String txt_email = email.getText().toString().trim();
-                String txt_password = password.getText().toString().trim();
 
-                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-                    Snackbar.make(view, "Email or Password is Empty", Snackbar.LENGTH_SHORT).setAction("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+        login.setOnClickListener(viewLogin -> {
+            String txt_email = Objects.requireNonNull(email.getText()).toString().trim();
+            String txt_password = Objects.requireNonNull(password.getText()).toString().trim();
 
-                        }
-                    }).show();
-                } else {
-                    loginUser(txt_email, txt_password);
-
-                }
+            //if all editText is Empty
+            if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
+                Snackbar.make(viewLogin, "please enter information", Snackbar.LENGTH_LONG)
+                        .setAction("OK", viewCheckEmpty -> {
+                        }).show();
+            } else {
+                loginUser(txt_email, txt_password);
             }
         });
 
         return view;
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void loginUser(String txtEmail, String txtPassword) {
         progressDialog.setMessage("Please Wait ....");
         progressDialog.show();
-        mAuth.signInWithEmailAndPassword(txtEmail, txtPassword)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Snackbar.make(coordinatorLayout, "Login is Successful", Snackbar.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getContext(), MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+        mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
                 progressDialog.dismiss();
-                Snackbar.make(coordinatorLayout, e.getMessage() + "Login failed Try again", Snackbar.LENGTH_SHORT)
-                        .setAction("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                password.setText(null);
-                                email.setText(txtEmail);
-                            }
-                        }).show();
+                Snackbar.make(coordinatorLayout, "Login is Successful", Snackbar.LENGTH_SHORT).show();
+
+                //delay for start activity
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    Objects.requireNonNull(getActivity()).finish();
+                }, LOGIN_SIGN_UP_DELAY);
+
+            } else {
+                progressDialog.dismiss();
+                try {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                // if user enters invalid email.
+                catch (FirebaseAuthInvalidCredentialsException invalidEmail) {
+                    Snackbar.make(coordinatorLayout, "The entered email is invalid", Snackbar.LENGTH_LONG)
+                            .setAction("OK", view -> {
+                                email.setText(null);
+                                email.requestFocus();
+                            }).show();
+                }
+                //Login failed Try again
+                catch (Exception exception) {
+                    //if email or password incorrect
+                    if (Objects.equals(exception.getMessage(), "The password is invalid or the user does not have a password.")) {
+                        Snackbar.make(coordinatorLayout, "The information entered is incorrect", Snackbar.LENGTH_LONG)
+                                .setAction("OK", view -> {
+                                }).show();
+                    }
+                    //if email exist
+                    if (Objects.equals(exception.getMessage(), "There is no user record corresponding to this identifier. The user may have been deleted.")) {
+                        Snackbar.make(coordinatorLayout, "You have not signup before, please signup", Snackbar.LENGTH_LONG)
+                                .setAction("OK", view -> {
+                                    SIGN_UP_FRAGMENT = true;
+                                    LOGIN_FRAGMENT = false;
+                                    Intent intent = new Intent(getContext(), LoginOrSignUpActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                    Objects.requireNonNull(getActivity()).finish();
+                                }).show();
+                    } else {
+                        Snackbar.make(coordinatorLayout, Objects.requireNonNull(exception.getMessage()), Snackbar.LENGTH_LONG)
+                                .setAction("OK", view -> {
+                                    password.setText(null);
+                                    email.setText(txtEmail);
+                                    email.requestFocus();
+                                }).show();
+                    }
+                }
             }
-        });;
+        });
     }
-
-
 }
