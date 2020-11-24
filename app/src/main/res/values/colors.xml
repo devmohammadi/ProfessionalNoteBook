@@ -21,11 +21,14 @@
     <color name="txt_btn">#3b3b3b</color>
     <color name="txt_btn_dark">#fdfdfd</color>
 
-    <color name="color1">#F1755B</color>
-    <color name="color2">#5CB187</color>
-    <color name="color3">#B05777</color>
-    <color name="color4">#EEBE5C</color>
-    <color name="color5">#8778E9</color>
+    <color name="color1">#c4001d</color>
+    <color name="color2">#9e00c5</color>
+    <color name="color3">#0031ca</color>
+    <color name="color4">#00b2cc</color>
+    <color name="color5">#ffea00</color>
+    <color name="color6">#ff3d00</color>
+    <color name="color7">#00b248</color>
+    <color name="color8">#4527a0</color>
 
     <color name="colorDividerDay">#FFF2F2F2</color>
     <color name="colorDividerNight">#FF020202</color>
@@ -33,6 +36,6 @@
     <color name="BackgroundDay">#ffffff</color>
     <color name="BackgroundNight">#121212</color>
 
-
+    <color name="red">#ffff0000</color>
 
 </resources>

@@ -71,12 +71,15 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/ivAddNote"
+                    app:tabIconTint="@android:color/darker_gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_add_note" />
+                    android:src="@drawable/ic_add_note"
+                    android:contentDescription="@string/description_for_image_view" />
 
 
             </RelativeLayout>
@@ -124,21 +127,25 @@
             app:tabRippleColor="@null">
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tiHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_home" />
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tiCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_category" />
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tiSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_settings" />
 
             <com.google.android.material.tabs.TabItem
+                android:id="@+id/tiAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/ic_person" />

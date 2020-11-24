@@ -47,4 +47,8 @@ dependencies {
     //FireBase
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-database:19.5.1'
+
+
+    //Persian Date
+    implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
 }

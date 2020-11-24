@@ -9,17 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProfessionalNoteBook">
-        <activity android:name=".activity.LoginOrSignUpActivity"
-            android:theme="@style/Theme.ProfessionalNoteBook.LoginSignUp"/>
+        <activity android:name=".activity.UpdateShowDeleteNoteActivity"
+            android:theme="@style/Theme.ProfessionalNoteBook.MainActivity"/>
+        <activity
+            android:name=".activity.CreateNoteActivity"
+            android:theme="@style/Theme.ProfessionalNoteBook.MainActivity" />
+        <activity
+            android:name=".activity.LoginOrSignUpActivity"
+            android:theme="@style/Theme.ProfessionalNoteBook.LoginSignUp" />
         <activity android:name=".activity.UserAccountActivity" />
-        <activity android:name=".activity.MainActivity"
-            android:theme="@style/Theme.ProfessionalNoteBook.MainActivity">
-        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/Theme.ProfessionalNoteBook.MainActivity" />
         <activity
             android:name=".activity.SplashScreenActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

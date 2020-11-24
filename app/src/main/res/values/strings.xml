@@ -15,8 +15,22 @@
     <string name="login_with">Login With</string>
     <string name="email">Email</string>
     <string name="sort_by">Sort by</string>
-    <string name="time">13 : 40 pm 1399/08/29</string>
+    <string name="time">13:40  99/8/29</string>
     <string name="this_is_title_note">this is title note</string>
     <string name="descriptionNote">this is description for note.this is description for note.this is description for note.this is description for note.this is description for note.this is description for note.this is description for note.</string>
-
+    <string name="select_category">Select Category</string>
+    <string name="note">Note</string>
+    <string name="cancel">Cancel</string>
+    <string name="title">Title</string>
+    <string name="save">save</string>
+    <string name="description_for_image_view">Description For ImageView</string>
+    <string name="titleSave">Professional NoteBook</string>
+    <string name="titleCategory">Professional NoteBook</string>
+    <string name="titleDelete">Delete NoteBook</string>
+    <string name="messageDelete">Do you want to delete this note?</string>
+    <string name="messageSave">Do you want to save change to note?</string>
+    <string name="yesSave">Save</string>
+    <string name="yesDelete">Yes</string>
+    <string name="noSave">Don\'t save</string>
+    <string name="noDelete">No</string>
 </resources>
