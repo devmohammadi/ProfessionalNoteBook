@@ -35,4 +35,6 @@
     <string name="noDelete">No</string>
     <string name="lastmodify">LastModify :</string>
     <string name="last_modify">Last Modify</string>
+    <string name="logout">LogOut</string>
+    <string name="biography">BioGraphy</string>
 </resources>

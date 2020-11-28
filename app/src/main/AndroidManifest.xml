@@ -24,7 +24,6 @@
         <activity
             android:name=".activity.LoginOrSignUpActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.LoginSignUp" />
-        <activity android:name=".activity.UserAccountActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.MainActivity" />
