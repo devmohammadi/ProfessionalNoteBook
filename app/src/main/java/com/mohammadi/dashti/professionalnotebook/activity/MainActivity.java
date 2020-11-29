@@ -1,5 +1,7 @@
 package com.mohammadi.dashti.professionalnotebook.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -18,13 +21,33 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.mohammadi.dashti.professionalnotebook.R;
 import com.mohammadi.dashti.professionalnotebook.fragment.CategoryFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.HomeFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.SettingsFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.UserAccountFragment;
+import com.mohammadi.dashti.professionalnotebook.model.Note;
+import com.mohammadi.dashti.professionalnotebook.model.User;
+import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.CATEGORY;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.NEWEST;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.OLDEST;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SORT;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.TIME;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.TITLE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,12 +62,23 @@ public class MainActivity extends AppCompatActivity {
     private String setting;
     private String account;
 
+    private FirebaseAuth mAuth;
+    private CircleImageView imageProfile;
+    private TextView name;
+    private TextView email;
+
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+        imageProfile = findViewById(R.id.ivProfileImage);
+        name = findViewById(R.id.ivName);
+        email = findViewById(R.id.ivEmail);
+        mAuth = FirebaseAuth.getInstance();
+        readInfoUser();
 
         tableLayout = findViewById(R.id.tabLayout);
         view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.tab_background, null);
@@ -104,6 +138,33 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, CreateNoteActivity.class)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             finish();
+        });
+    }
+
+    //get user information in firebase
+    private void readInfoUser() {
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users")
+                .child(mAuth.getCurrentUser().getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String txtName = Objects.requireNonNull(snapshot.child("name").getValue()).toString();
+                String txtEmail = Objects.requireNonNull(snapshot.child("email").getValue()).toString();
+                String imageUrl = Objects.requireNonNull(snapshot.child("imageUrl").getValue()).toString();
+
+                name.setText(txtName);
+                email.setText(txtEmail);
+                Picasso.get()
+                        .load(imageUrl)
+                        .placeholder(R.drawable.ic_person)
+                        .error(R.drawable.ic_person)
+                        .into(imageProfile);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 

@@ -15,9 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/BackgroundNight"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:contentInsetEnd="0dp"
-            app:contentInsetStart="0dp">
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <RelativeLayout
                 android:id="@+id/rlActionBar"
@@ -55,9 +55,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
                         android:includeFontPadding="false"
+                        android:maxLines="1"
                         android:text="@string/name"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -66,21 +67,23 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
                         android:includeFontPadding="false"
+                        android:maxLines="1"
                         android:text="@string/email"
-                        android:textSize="18sp" />
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
 
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/ivAddNote"
-                    app:tabIconTint="@android:color/darker_gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:contentDescription="@string/description_for_image_view"
                     android:src="@drawable/ic_add_note"
-                    android:contentDescription="@string/description_for_image_view" />
+                    app:tabIconTint="@android:color/darker_gray" />
 
 
             </RelativeLayout>
@@ -99,11 +102,11 @@
 
         <FrameLayout
             android:id="@+id/frameLayout"
-            android:background="@color/BackgroundNight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/BackgroundNight"
             android:focusable="true"
-            android:focusableInTouchMode="true"/>
+            android:focusableInTouchMode="true" />
 
 
     </androidx.core.widget.NestedScrollView>
@@ -111,18 +114,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/BackgroundNight"
         android:layout_gravity="center|bottom"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        android:gravity="center">
+        android:background="@color/BackgroundNight"
+        android:gravity="center"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_gravity="center"
-            app:tabGravity="center"
             android:background="@color/BackgroundNight"
+            app:tabGravity="center"
             app:tabIconTint="@android:color/darker_gray"
             app:tabIndicator="@null"
             app:tabMinWidth="40dp"

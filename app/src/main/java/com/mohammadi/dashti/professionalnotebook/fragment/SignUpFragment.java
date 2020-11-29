@@ -110,7 +110,6 @@ public class SignUpFragment extends Fragment {
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("name", txtName);
                 map.put("email", txtEmail);
-                map.put("uid", Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
                 map.put("bio", "");
                 map.put("imageUrl", "default");
 
