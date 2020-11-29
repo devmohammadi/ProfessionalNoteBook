@@ -1,5 +1,7 @@
 package com.mohammadi.dashti.professionalnotebook.model;
 
+import java.util.Comparator;
+
 public class Note {
 
     private String category;
@@ -48,4 +50,14 @@ public class Note {
     public void setTime(Long time) {
         this.time = time;
     }
+
+    //Sort By title ( ascending )
+    public static final Comparator<Note> BY_TITLE = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
+
+    //Sort By category ( ascending )
+    public static final Comparator<Note> BY_CATEGORY = (o1, o2) -> o1.getCategory().compareTo(o2.getCategory());
+
+    //Sort By time ( ascending )
+    public static final Comparator<Note> BY_TIME = (o1, o2) -> o1.getTime().compareTo(o2.getTime());
+
 }

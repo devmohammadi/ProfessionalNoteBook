@@ -9,4 +9,8 @@ public class Constants {
     public static String NOTE = "NOTE";
     public static String TIME = "TIME";
     public static String CATEGORY = "CATEGORY";
+    public static String LANGUAGE = "LANGUAGE";
+    public static String SORT = "SORT";
+    public static String OLDEST = "OLDEST";
+    public static String NEWEST = "NEWEST";
 }

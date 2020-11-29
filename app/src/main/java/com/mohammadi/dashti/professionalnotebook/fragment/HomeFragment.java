@@ -1,12 +1,14 @@
 package com.mohammadi.dashti.professionalnotebook.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +32,17 @@ import com.mohammadi.dashti.professionalnotebook.model.Note;
 import com.mohammadi.dashti.professionalnotebook.util.Constants;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.CATEGORY;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.LANGUAGE;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.NEWEST;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.OLDEST;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SORT;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.TIME;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.TITLE;
 
 
 public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItemClick, NoteAdapter.OnRecyclerItemClickDelete {
@@ -42,13 +54,23 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
     private FirebaseAuth mAuth;
     private MaterialAlertDialogBuilder alertDialogBuilder;
 
+    private TextView sort;
+    private CharSequence[] listSort;
+
+    private SharedPreferences sharedPreferences;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(LANGUAGE, Context.MODE_PRIVATE);
+
         mAuth = FirebaseAuth.getInstance();
+
+        sort = view.findViewById(R.id.tvSortBy);
+        sort.setOnClickListener(sortView -> sort());
 
         recyclerViewNoteItem = view.findViewById(R.id.recyclerItemNote);
         recyclerViewNoteItem.setHasFixedSize(true);
@@ -64,28 +86,31 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
 
     //get note in firebase
     private void readNote() {
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Notes").child(mAuth.getCurrentUser().getUid());
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Notes")
+                .child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+        mNote.clear();
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                mNote.clear();
-                String key = snapshot.getKey();
-                reference.child(key).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String category = snapshot.child("category").getValue().toString();
-                        String note = snapshot.child("note").getValue().toString();
-                        Long time = (Long) snapshot.child("time").getValue();
-                        String title = snapshot.child("title").getValue().toString();
-                        Note myNote = new Note(category, title, note, time);
-                        mNote.add(myNote);
-                        noteAdapter.notifyDataSetChanged();
-                    }
+                String category = Objects.requireNonNull(snapshot.child("category").getValue()).toString();
+                String note = Objects.requireNonNull(snapshot.child("note").getValue()).toString();
+                Long time = (Long) snapshot.child("time").getValue();
+                String title = Objects.requireNonNull(snapshot.child("title").getValue()).toString();
+                Note myNote = new Note(category, title, note, time);
+                mNote.add(myNote);
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+                //get setting from shared preferences of sort option
+                String mSortSetting = sharedPreferences.getString(SORT, NEWEST);
+                if (mSortSetting.equals(NEWEST)) {
+                    Collections.reverse(mNote);
+                } else if (mSortSetting.equals(CATEGORY)) {
+                    Collections.sort(mNote, Note.BY_CATEGORY);
+                } else if (mSortSetting.equals(TITLE)) {
+                    Collections.sort(mNote, Note.BY_TITLE);
+                } else if (mSortSetting.equals(TIME) || mSortSetting.equals(OLDEST)) {
+                    Collections.sort(mNote, Note.BY_TIME);
+                }
+                noteAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -106,7 +131,7 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
         });
     }
 
-
+    // when click on note go to Activity for show and update and delete
     @Override
     public void onClick(Note note) {
         Intent intentUpdateShowDeleteNote = new Intent(getActivity(), UpdateShowDeleteNoteActivity.class)
@@ -118,23 +143,23 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
         startActivity(intentUpdateShowDeleteNote);
     }
 
-
+    // when click on button delete show alert dialog for delete
     @Override
     public void onClickDelete(Note note, int pos) {
-        alertDialogBuilder = new MaterialAlertDialogBuilder(getContext());
+        alertDialogBuilder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()));
         alertDialogBuilder.setTitle(R.string.titleDelete)
                 .setMessage(R.string.messageDelete)
                 .setIcon(R.drawable.ic_delete_warning)
-                .setPositiveButton(R.string.yesDelete, (dialog, which) -> deleteNote(note, pos))
+                .setPositiveButton(R.string.yesDelete, (dialog, which) -> deleteNote(note))
                 .setNegativeButton(R.string.noDelete, (dialog, which) -> dialog.cancel())
                 .setNeutralButton(R.string.cancel, (dialog, which) -> dialog.cancel())
                 .show();
     }
 
-
-    private void deleteNote(Note note, int pos) {
+    // when click yes delete note
+    private void deleteNote(Note note) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query noteQuery = ref.child("Notes").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        Query noteQuery = ref.child("Notes").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .orderByChild("time").equalTo(note.getTime());
         Query categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(note.getCategory());
@@ -158,7 +183,6 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
                     });
                 }
                 readNote();
-                noteAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -168,5 +192,51 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
         });
     }
 
+    // when clicked sort button
+    private void sort() {
+        listSort = new CharSequence[]{
+                "Category",
+                "Title",
+                "Time",
+                "Newest",
+                "Oldest"
+        };
+        alertDialogBuilder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()));
+        alertDialogBuilder.setTitle(R.string.sort_by)
+                .setItems(listSort, (dialog, which) -> {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    switch (which) {
+                        case 0:
+                            editor.putString(SORT, CATEGORY);
+                            editor.apply();
+                            readNote();
+                            break;
+                        case 1:
+                            editor.putString(SORT, TITLE);
+                            editor.apply();
+                            readNote();
+                            break;
+                        case 2:
+                            editor.putString(SORT, TIME);
+                            editor.apply();
+                            readNote();
+                            break;
+                        case 4:
+                            editor.putString(SORT, OLDEST);
+                            editor.apply();
+                            readNote();
+                            break;
+                        default:
+                            editor.putString(SORT, NEWEST);
+                            editor.apply();
+                            readNote();
+                            break;
+                    }
+                })
+                .setIcon(R.drawable.ic_sort)
+                .setNeutralButton(R.string.cancel, (dialog, which) -> {
+                })
+                .show();
 
+    }
 }
