@@ -37,4 +37,8 @@
     <string name="last_modify">Last Modify</string>
     <string name="logout">LogOut</string>
     <string name="biography">BioGraphy</string>
+    <string name="home">HOME</string>
+    <string name="setting">SETTING</string>
+    <string name="category">CATEGORY</string>
+    <string name="account">ACCOUNT</string>
 </resources>

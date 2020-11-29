@@ -20,6 +20,7 @@
             app:contentInsetStart="0dp">
 
             <RelativeLayout
+                android:id="@+id/rlActionBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="16dp"
@@ -100,7 +101,9 @@
             android:id="@+id/frameLayout"
             android:background="@color/BackgroundNight"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
 
     </androidx.core.widget.NestedScrollView>
@@ -116,14 +119,14 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:layout_gravity="center"
             app:tabGravity="center"
             android:background="@color/BackgroundNight"
             app:tabIconTint="@android:color/darker_gray"
             app:tabIndicator="@null"
-            app:tabMinWidth="60dp"
-            app:tabMode="fixed"
+            app:tabMinWidth="40dp"
+            app:tabMode="scrollable"
             app:tabRippleColor="@null">
 
             <com.google.android.material.tabs.TabItem
