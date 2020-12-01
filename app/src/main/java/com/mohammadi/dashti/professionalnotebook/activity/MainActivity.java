@@ -1,28 +1,23 @@
 package com.mohammadi.dashti.professionalnotebook.activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,21 +28,11 @@ import com.mohammadi.dashti.professionalnotebook.fragment.CategoryFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.HomeFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.SettingsFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.UserAccountFragment;
-import com.mohammadi.dashti.professionalnotebook.model.Note;
-import com.mohammadi.dashti.professionalnotebook.model.User;
 import com.squareup.picasso.Picasso;
 
-import java.util.Collections;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.mohammadi.dashti.professionalnotebook.util.Constants.CATEGORY;
-import static com.mohammadi.dashti.professionalnotebook.util.Constants.NEWEST;
-import static com.mohammadi.dashti.professionalnotebook.util.Constants.OLDEST;
-import static com.mohammadi.dashti.professionalnotebook.util.Constants.SORT;
-import static com.mohammadi.dashti.professionalnotebook.util.Constants.TIME;
-import static com.mohammadi.dashti.professionalnotebook.util.Constants.TITLE;
 
 public class MainActivity extends AppCompatActivity {
 

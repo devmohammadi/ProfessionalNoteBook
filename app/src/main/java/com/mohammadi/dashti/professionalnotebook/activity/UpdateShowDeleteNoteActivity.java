@@ -32,7 +32,6 @@ import java.util.Objects;
 
 import saman.zamani.persiandate.PersianDate;
 
-import static android.R.anim.fade_out;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.*;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.LOGIN_SIGN_UP_DELAY;
 

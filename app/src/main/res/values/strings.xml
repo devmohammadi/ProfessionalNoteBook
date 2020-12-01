@@ -41,4 +41,6 @@
     <string name="setting">SETTING</string>
     <string name="category">CATEGORY</string>
     <string name="account">ACCOUNT</string>
+    <string name="empty">This Category is Empty Please Crete a note</string>
+    <string name="crete">Create Note</string>
 </resources>

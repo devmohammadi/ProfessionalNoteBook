@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intentUpdateShowDeleteNote.putExtra(Constants.TITLE, note.getTitle());
         intentUpdateShowDeleteNote.putExtra(Constants.NOTE, note.getNote());
-        intentUpdateShowDeleteNote.putExtra(Constants.TIME, note.getTime());
+        intentUpdateShowDeleteNote.putExtra(Constants.TIME, note.getTime().toString());
         intentUpdateShowDeleteNote.putExtra(Constants.CATEGORY, note.getCategory());
         startActivity(intentUpdateShowDeleteNote);
     }
