@@ -57,6 +57,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         Picasso.get()
                 .load(mCategory.get(position).getImage())
                 .fit()
+                .placeholder(R.drawable.ic_category_image)
                 .error(R.drawable.ic_category_image_error)
                 .into(holder.imageCategory);
 

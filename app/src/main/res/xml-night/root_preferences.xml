@@ -1,0 +1,38 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/themeHeader">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="NIGHT"
+            app:summaryOff="@string/summaryOff"
+            app:summaryOn="@string/summaryOn"
+            app:title="@string/theme_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/languageHeader">
+
+
+        <ListPreference
+            app:defaultValue="en-US"
+            app:entries="@array/lan_entries"
+            app:entryValues="@array/lan_values"
+            app:key="LANGUAGE"
+            app:title="@string/titleLanguage"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/feedbackHeader">
+
+
+        <EditTextPreference
+            app:key="FEEDBACK"
+            app:summary="@string/summaryFeedback"
+            app:title="@string/titleFeedback" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

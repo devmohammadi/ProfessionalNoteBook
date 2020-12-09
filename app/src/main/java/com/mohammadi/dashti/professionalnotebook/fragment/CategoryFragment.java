@@ -38,13 +38,13 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnRecy
 
 
         ArrayList<Category> categories = new ArrayList<>();
-        categories.add(new Category("Programming", Constants.PROGRAMMING));
-        categories.add(new Category("Cleaning", Constants.CLEANING));
-        categories.add(new Category("Lesson", Constants.LESSON));
-        categories.add(new Category("Movie", Constants.MOVIE));
-        categories.add(new Category("Music", Constants.MUSIC));
-        categories.add(new Category("Buy", Constants.BUY));
-        categories.add(new Category("Other", Constants.OTHER));
+        categories.add(new Category(getString(R.string.Programming), Constants.PROGRAMMING));
+        categories.add(new Category(getString(R.string.Cleaning), Constants.CLEANING));
+        categories.add(new Category(getString(R.string.Lesson), Constants.LESSON));
+        categories.add(new Category(getString(R.string.Movie), Constants.MOVIE));
+        categories.add(new Category(getString(R.string.Music), Constants.MUSIC));
+        categories.add(new Category(getString(R.string.Buy), Constants.BUY));
+        categories.add(new Category(getString(R.string.Other), Constants.OTHER));
 
         recyclerViewCategoryItem.setHasFixedSize(true);
         recyclerViewCategoryItem.setLayoutManager(new LinearLayoutManager(getContext()));

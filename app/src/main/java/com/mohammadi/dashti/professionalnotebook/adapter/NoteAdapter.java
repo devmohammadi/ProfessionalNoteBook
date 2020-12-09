@@ -74,26 +74,34 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         String time = date.getHour() + ":" + date.getMinute() + "  " + date.getShYear() + "/" + date.getShMonth() + "/" + date.getShDay();
         holder.time.setText(time);
 
-        switch (mNote.get(position).getCategory()) {
+        String getCat = mNote.get(position).getCategory();
+        switch (getCat) {
             case "Programming":
+            case "برنامه نویسی":
                 holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.color1));
                 break;
             case "Cleaning":
+            case "تمیز کاری":
                 holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.color2));
                 break;
             case "Lesson":
+            case "درس خواندن":
                 holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.color3));
                 break;
             case "Movie":
+            case "تماشای فیلم":
                 holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.color4));
                 break;
             case "Music":
+            case "موسیقی":
                 holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.color5));
                 break;
             case "Buy":
+            case "خرید کردن":
                 holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.color6));
                 break;
             case "Other":
+            case "دیگر":
                 holder.view.setBackgroundColor(mContext.getResources().getColor(R.color.color7));
                 break;
             default:

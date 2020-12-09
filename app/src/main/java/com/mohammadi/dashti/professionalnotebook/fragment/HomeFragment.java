@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.CATEGORY;
-import static com.mohammadi.dashti.professionalnotebook.util.Constants.LANGUAGE;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.NEWEST;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.OLDEST;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.SORT;
@@ -65,7 +64,7 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences(LANGUAGE, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(SORT, Context.MODE_PRIVATE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -146,7 +145,7 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
     // when click on button delete show alert dialog for delete
     @Override
     public void onClickDelete(Note note, int pos) {
-        alertDialogBuilder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()));
+        alertDialogBuilder = new MaterialAlertDialogBuilder(requireContext());
         alertDialogBuilder.setTitle(R.string.titleDelete)
                 .setMessage(R.string.messageDelete)
                 .setIcon(R.drawable.ic_delete_warning)
@@ -161,7 +160,7 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Query noteQuery = ref.child("Notes").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .orderByChild("time").equalTo(note.getTime());
-        Query categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        DatabaseReference categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(note.getCategory());
 
         noteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -170,17 +169,7 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
                 mNote.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     snapshot.getRef().removeValue();
-                    categoryQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            snapshot.getRef().removeValue();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("NoteAdapter", "onCancelledDeleteCategory", error.toException());
-                        }
-                    });
+                    categoryQuery.child(snapshot.getKey()).removeValue();
                 }
                 readNote();
             }
@@ -195,13 +184,13 @@ public class HomeFragment extends Fragment implements NoteAdapter.OnRecyclerItem
     // when clicked sort button
     private void sort() {
         listSort = new CharSequence[]{
-                "Category",
-                "Title",
-                "Time",
-                "Newest",
-                "Oldest"
+                getString(R.string.Category),
+                getString(R.string.Title),
+                getString(R.string.Time),
+                getString(R.string.Newest),
+                getString(R.string.Oldest)
         };
-        alertDialogBuilder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()));
+        alertDialogBuilder = new MaterialAlertDialogBuilder(requireContext());
         alertDialogBuilder.setTitle(R.string.sort_by)
                 .setItems(listSort, (dialog, which) -> {
                     SharedPreferences.Editor editor = sharedPreferences.edit();

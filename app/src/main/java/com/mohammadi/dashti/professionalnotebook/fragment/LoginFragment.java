@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +67,8 @@ public class LoginFragment extends Fragment {
 
             //if all editText is Empty
             if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-                Snackbar.make(viewLogin, "please enter information", Snackbar.LENGTH_LONG)
-                        .setAction("OK", viewCheckEmpty -> {
+                Snackbar.make(viewLogin, getString(R.string.enterInfo), Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.ok), viewCheckEmpty -> {
                         }).show();
             } else {
                 loginUser(txt_email, txt_password);
@@ -79,19 +80,19 @@ public class LoginFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void loginUser(String txtEmail, String txtPassword) {
-        progressDialog.setMessage("Please Wait ....");
+        progressDialog.setMessage(getString(R.string.pleaseWait));
         progressDialog.show();
         mAuth.signInWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 progressDialog.dismiss();
-                Snackbar.make(coordinatorLayout, "Login is Successful", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, getString(R.string.loginSuccessful), Snackbar.LENGTH_SHORT).show();
 
                 //delay for start activity
                 new Handler().postDelayed(() -> {
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-                    Objects.requireNonNull(getActivity()).finish();
+                    requireActivity().finish();
                 }, LOGIN_SIGN_UP_DELAY);
 
             } else {
@@ -101,8 +102,8 @@ public class LoginFragment extends Fragment {
                 }
                 // if user enters invalid email.
                 catch (FirebaseAuthInvalidCredentialsException invalidEmail) {
-                    Snackbar.make(coordinatorLayout, "The entered email is invalid", Snackbar.LENGTH_LONG)
-                            .setAction("OK", view -> {
+                    Snackbar.make(coordinatorLayout, getString(R.string.invalidEmail), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.ok), view -> {
                                 email.setText(null);
                                 email.requestFocus();
                             }).show();
@@ -111,24 +112,24 @@ public class LoginFragment extends Fragment {
                 catch (Exception exception) {
                     //if email or password incorrect
                     if (Objects.equals(exception.getMessage(), "The password is invalid or the user does not have a password.")) {
-                        Snackbar.make(coordinatorLayout, "The information entered is incorrect", Snackbar.LENGTH_LONG)
-                                .setAction("OK", view -> {
+                        Snackbar.make(coordinatorLayout, getString(R.string.incorrectInfo), Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.ok), view -> {
                                 }).show();
                     }
-                    //if email exist
+                    //if email not exist
                     if (Objects.equals(exception.getMessage(), "There is no user record corresponding to this identifier. The user may have been deleted.")) {
-                        Snackbar.make(coordinatorLayout, "You have not signup before, please signup", Snackbar.LENGTH_LONG)
-                                .setAction("OK", view -> {
+                        Snackbar.make(coordinatorLayout, getString(R.string.existEmailLogin), Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.ok), view -> {
                                     SIGN_UP_FRAGMENT = true;
                                     LOGIN_FRAGMENT = false;
                                     Intent intent = new Intent(getContext(), LoginOrSignUpActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
-                                    Objects.requireNonNull(getActivity()).finish();
+                                    requireActivity().finish();
                                 }).show();
                     } else {
-                        Snackbar.make(coordinatorLayout, Objects.requireNonNull(exception.getMessage()), Snackbar.LENGTH_LONG)
-                                .setAction("OK", view -> {
+                        Snackbar.make(coordinatorLayout, getString(R.string.tryAgain), Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.ok), view -> {
                                     password.setText(null);
                                     email.setText(txtEmail);
                                     email.requestFocus();

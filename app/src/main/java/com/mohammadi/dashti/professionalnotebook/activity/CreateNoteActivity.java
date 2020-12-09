@@ -3,6 +3,7 @@ package com.mohammadi.dashti.professionalnotebook.activity;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -100,18 +101,18 @@ public class CreateNoteActivity extends AppCompatActivity {
         String txtTitle = title.getText().toString().trim();
         String txtNote = note.getText().toString().trim();
         Long time = System.currentTimeMillis();
-        if (txtCategory.isEmpty()) txtCategory = "Other";
+        if (txtCategory.isEmpty()) txtCategory = getString(R.string.other);
         if (TextUtils.isEmpty(txtTitle) ||
                 TextUtils.isEmpty(txtNote)
         ) {
-            Snackbar.make(coordinatorLayout, "please enter all field", Snackbar.LENGTH_LONG)
-                    .setAction("OK", viewCheckEmpty -> {
+            Snackbar.make(coordinatorLayout, getString(R.string.emptyMessageField), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.ok), viewCheckEmpty -> {
                         if (TextUtils.isEmpty(txtTitle)) title.requestFocus();
                         else if (TextUtils.isEmpty(txtNote)) note.requestFocus();
                         else title.requestFocus();
                     }).show();
         } else {
-            progressDialog.setMessage("Please Wait ....");
+            progressDialog.setMessage(getString(R.string.pleaseWait));
             progressDialog.show();
 
             mRootRef = mRootRef.child("Notes");
@@ -123,7 +124,24 @@ public class CreateNoteActivity extends AppCompatActivity {
             mapNote.put("note", txtNote);
             mapNote.put("time", time);
 
-            String finalTxtCategory = txtCategory;
+            String finalTxtCategory;
+            if(txtCategory.equals(getString(R.string.Programming)))
+             finalTxtCategory = "Programming";
+            else if(txtCategory.equals(getString(R.string.Cleaning)))
+                finalTxtCategory = "Cleaning";
+            else if(txtCategory.equals(getString(R.string.Lesson)))
+                finalTxtCategory = "Lesson";
+            else if(txtCategory.equals(getString(R.string.Movie)))
+                finalTxtCategory = "Movie";
+            else if(txtCategory.equals(getString(R.string.Music)))
+                finalTxtCategory = "Music";
+            else if(txtCategory.equals(getString(R.string.Buy)))
+                finalTxtCategory = "Buy";
+            else if(txtCategory.equals(getString(R.string.Other)))
+                finalTxtCategory = "Other";
+            else
+                finalTxtCategory = txtCategory;
+
             mRootRef.child(mAuth.getCurrentUser().getUid()).child(noteId).setValue(mapNote)
                     .addOnCompleteListener(task -> {
                         DatabaseReference refCategory = FirebaseDatabase.getInstance().getReference("Category");
@@ -131,7 +149,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                         refCategory.child(mAuth.getCurrentUser().getUid()).child(finalTxtCategory).child(noteId).setValue(noteId)
                                 .addOnCompleteListener(task1 -> {
                                     progressDialog.dismiss();
-                                    Snackbar.make(coordinatorLayout, "Note Save Successful", Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(coordinatorLayout, getString(R.string.noteSaveSuccessful), Snackbar.LENGTH_SHORT).show();
 
                                     //delay for start activity
                                     new Handler().postDelayed(() -> {
@@ -150,13 +168,13 @@ public class CreateNoteActivity extends AppCompatActivity {
     private void selectCategory() {
 
         listCategory = new CharSequence[]{
-                "Programming",
-                "Cleaning",
-                "Lesson",
-                "Movie",
-                "Music",
-                "Buy",
-                "Other"
+                getString(R.string.Programming),
+                getString(R.string.Cleaning),
+                getString(R.string.Lesson),
+                getString(R.string.Movie),
+                getString(R.string.Music),
+                getString(R.string.Buy),
+                getString(R.string.Other)
         };
         alertDialogBuilder.setTitle(R.string.titleCategory)
                 .setItems(listCategory, (dialog, which) -> category.setText(listCategory[which]))

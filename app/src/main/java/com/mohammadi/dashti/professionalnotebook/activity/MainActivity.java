@@ -1,13 +1,12 @@
 package com.mohammadi.dashti.professionalnotebook.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -15,6 +14,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,9 +34,14 @@ import com.mohammadi.dashti.professionalnotebook.fragment.SettingsFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.UserAccountFragment;
 import com.squareup.picasso.Picasso;
 
+import java.util.Locale;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.EN;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.LANGUAGE;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SHARED_PREFERENCES_LANGUAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set language
+        SHARED_PREFERENCES_LANGUAGE = getSharedPreferences(LANGUAGE, Context.MODE_PRIVATE);
+        if (SHARED_PREFERENCES_LANGUAGE.getString(LANGUAGE, EN).equals(EN)) {
+            setLocale("en");
+        } else {
+            setLocale("fa");
+        }
         setContentView(R.layout.activity_main);
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
@@ -174,5 +190,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.frameLayout, fragment);
         transaction.commit();
+    }
+
+    public void setLocale(String lang) {
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        config.locale = new Locale(lang.toLowerCase());
+        resources.updateConfiguration(config, dm);
     }
 }

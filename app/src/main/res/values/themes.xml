@@ -34,6 +34,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="fontFamily">@font/baloo</item>
     </style>
 
     <style name="Theme.ProfessionalNoteBook.LoginSignUp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -74,6 +75,8 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">true</item>
         <item name="android:windowFullscreen">false</item>
+        <item name="fontFamily">@font/poppins_medium</item>
     </style>
+
 
 </resources>

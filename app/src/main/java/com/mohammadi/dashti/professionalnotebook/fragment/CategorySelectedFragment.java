@@ -50,6 +50,7 @@ public class CategorySelectedFragment extends Fragment implements NoteAdapter.On
     private MaterialAlertDialogBuilder alertDialogBuilder;
 
     private String category;
+    private String getCat;
     private List<String> listCategory;
 
     private TextView emptyMessage;
@@ -65,7 +66,23 @@ public class CategorySelectedFragment extends Fragment implements NoteAdapter.On
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            category = bundle.getString(Constants.CATEGORY);
+            getCat = bundle.getString(Constants.CATEGORY);
+            if(getCat.equals(getString(R.string.Programming)))
+                category = getString(R.string.Programming);
+            else if(getCat.equals(getString(R.string.Cleaning)))
+                category = getString(R.string.Cleaning);
+            else if(getCat.equals(getString(R.string.Lesson)))
+                category = getString(R.string.Lesson);
+            else if(getCat.equals(getString(R.string.Movie)))
+                category = getString(R.string.Movie);
+            else if(getCat.equals(getString(R.string.Music)))
+                category = getString(R.string.Music);
+            else if(getCat.equals(getString(R.string.Buy)))
+                category = getString(R.string.Buy);
+            else if(getCat.equals(getString(R.string.Other)))
+                category = getString(R.string.Other);
+            else
+                category = getCat;
         }
 
         categoryTitle = view.findViewById(R.id.tvTitleCategory);
@@ -109,7 +126,7 @@ public class CategorySelectedFragment extends Fragment implements NoteAdapter.On
                 handelFragment(new CategoryFragment());
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         // The callback can be enabled or disabled here or in handleOnBackPressed()
     }
@@ -187,6 +204,7 @@ public class CategorySelectedFragment extends Fragment implements NoteAdapter.On
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.remove(this);
         fragmentTransaction.commit();
     }
 
@@ -205,7 +223,7 @@ public class CategorySelectedFragment extends Fragment implements NoteAdapter.On
     // when click on button delete show alert dialog for delete
     @Override
     public void onClickDelete(Note note, int pos) {
-        alertDialogBuilder = new MaterialAlertDialogBuilder(Objects.requireNonNull(getContext()));
+        alertDialogBuilder = new MaterialAlertDialogBuilder(requireContext());
         alertDialogBuilder.setTitle(R.string.titleDelete)
                 .setMessage(R.string.messageDelete)
                 .setIcon(R.drawable.ic_delete_warning)

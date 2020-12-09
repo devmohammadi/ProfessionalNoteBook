@@ -5,6 +5,6 @@
 
     <corners android:radius="10dp"/>
 
-    <solid android:color="@color/colorDividerNight"/>
+    <solid android:color="@color/BackgroundNight"/>
 
 </shape>

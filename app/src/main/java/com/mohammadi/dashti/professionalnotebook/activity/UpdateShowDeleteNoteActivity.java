@@ -84,7 +84,26 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mNote = new Note(getIntent().getStringExtra(CATEGORY),
+        String cat = getIntent().getStringExtra(CATEGORY);
+        String finalTxtCategory;
+        if (cat.equals(getString(R.string.Programming)))
+            finalTxtCategory = "Programming";
+        else if (cat.equals(getString(R.string.Cleaning)))
+            finalTxtCategory = "Cleaning";
+        else if (cat.equals(getString(R.string.Lesson)))
+            finalTxtCategory = "Lesson";
+        else if (cat.equals(getString(R.string.Movie)))
+            finalTxtCategory = "Movie";
+        else if (cat.equals(getString(R.string.Music)))
+            finalTxtCategory = "Music";
+        else if (cat.equals(getString(R.string.Buy)))
+            finalTxtCategory = "Buy";
+        else if (cat.equals(getString(R.string.Other)))
+            finalTxtCategory = "Other";
+        else
+            finalTxtCategory = cat;
+
+        mNote = new Note(finalTxtCategory,
                 getIntent().getStringExtra(TITLE),
                 getIntent().getStringExtra(NOTE),
                 Long.parseLong(getIntent().getStringExtra(TIME)));
@@ -172,24 +191,14 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Query noteQuery = ref.child("Notes").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .orderByChild("time").equalTo(note.getTime());
-        Query categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        DatabaseReference categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(note.getCategory());
         noteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     snapshot.getRef().removeValue();
-                    categoryQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            snapshot.getRef().removeValue();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("NoteAdapter", "onCancelledDeleteCategory", error.toException());
-                        }
-                    });
+                    categoryQuery.child(snapshot.getKey()).removeValue();
                 }
                 //back to home fragment
                 startActivity(new Intent(UpdateShowDeleteNoteActivity.this, MainActivity.class)
@@ -207,13 +216,13 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
     private void selectCategory() {
 
         listCategory = new CharSequence[]{
-                "Programming",
-                "Cleaning",
-                "Lesson",
-                "Movie",
-                "Music",
-                "Buy",
-                "Other"
+                getString(R.string.Programming),
+                getString(R.string.Cleaning),
+                getString(R.string.Lesson),
+                getString(R.string.Movie),
+                getString(R.string.Music),
+                getString(R.string.Buy),
+                getString(R.string.Other)
         };
         alertDialogBuilder.setTitle(R.string.titleCategory)
                 .setItems(listCategory, (dialog, which) -> category.setText(listCategory[which]))
@@ -229,18 +238,18 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
         String txtNote = note.getText().toString().trim();
         Long timeNote = System.currentTimeMillis();
 
-        if (txtCategory.isEmpty()) txtCategory = "Other";
+        if (txtCategory.isEmpty()) txtCategory = getString(R.string.other);
         if (TextUtils.isEmpty(txtTitle) ||
                 TextUtils.isEmpty(txtNote)
         ) {
-            Snackbar.make(coordinatorLayout, "please enter all field", Snackbar.LENGTH_LONG)
-                    .setAction("OK", viewCheckEmpty -> {
+            Snackbar.make(coordinatorLayout, getString(R.string.emptyMessageField), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.ok), viewCheckEmpty -> {
                         if (TextUtils.isEmpty(txtTitle)) title.requestFocus();
                         else if (TextUtils.isEmpty(txtNote)) note.requestFocus();
                         else title.requestFocus();
                     }).show();
         } else {
-            progressDialog.setMessage("Please Wait ....");
+            progressDialog.setMessage(getString(R.string.pleaseWait));
             progressDialog.show();
 
 
@@ -253,18 +262,20 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
             Query noteQuery = ref.child("Notes").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                     .orderByChild("time").equalTo(noteUpdate.getTime());
-            Query categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(noteUpdate.getCategory());
+
             String finalTxtCategory = txtCategory;
+            DatabaseReference categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(noteUpdate.getCategory());
+
             noteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         snapshot.getRef().setValue(mapNote);
+                        categoryQuery.child(snapshot.getKey()).removeValue();
                         categoryQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
-                                dataSnapshot1.getRef().removeValue();
                                 ref.child("Category").child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
                                         .child(category.getText().toString()).child(Objects.requireNonNull(snapshot.getKey()))
                                         .setValue(Objects.requireNonNull(snapshot.getKey()));
@@ -287,8 +298,8 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
                     time.setText(timeModify);
 
                     //back to home fragment
-                    Snackbar.make(coordinatorLayout, "Update Note Successful", Snackbar.LENGTH_SHORT)
-                            .setAction("OK", view -> {
+                    Snackbar.make(coordinatorLayout, getString(R.string.updateNoteSuccessful), Snackbar.LENGTH_SHORT)
+                            .setAction(getString(R.string.ok), view -> {
                                 //delay for start activity
                                 new Handler().postDelayed(() -> {
                                     Intent intent = new Intent(UpdateShowDeleteNoteActivity.this, MainActivity.class);
@@ -332,6 +343,7 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
                     .show();
         } else {
             super.onBackPressed();
+            back();
         }
 
     }

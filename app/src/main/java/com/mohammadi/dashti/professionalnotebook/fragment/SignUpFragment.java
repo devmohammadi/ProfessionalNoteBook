@@ -79,13 +79,13 @@ public class SignUpFragment extends Fragment {
                     TextUtils.isEmpty(textName) ||
                     TextUtils.isEmpty(textPassword) ||
                     TextUtils.isEmpty(textConfirmPassword)) {
-                Snackbar.make(viewSignUp, "please enter information", Snackbar.LENGTH_LONG)
-                        .setAction("OK", viewCheckEmpty -> {
+                Snackbar.make(viewSignUp, getString(R.string.enterInfo), Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.ok), viewCheckEmpty -> {
                         }).show();
 
                 //if password not equals confirm password
             } else if (!textPassword.equals(textConfirmPassword)) {
-                Snackbar.make(viewSignUp, "A password is not equal to confirm password", Snackbar.LENGTH_LONG).setAction("OK", view1 -> {
+                Snackbar.make(viewSignUp, getString(R.string.notEqualPass), Snackbar.LENGTH_LONG).setAction(getString(R.string.ok), view1 -> {
                     confirmPassword.setText(null);
                     password.setText(null);
                     password.requestFocus();
@@ -103,7 +103,7 @@ public class SignUpFragment extends Fragment {
             String txtPassword,
             String txtName) {
 
-        progressDialog.setMessage("Please Wait ....");
+        progressDialog.setMessage(getString(R.string.pleaseWait));
         progressDialog.show();
         mAuth.createUserWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -116,14 +116,14 @@ public class SignUpFragment extends Fragment {
                 mRootRef.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map);
 
                 progressDialog.dismiss();
-                Snackbar.make(coordinatorLayout, "SignUp is Successful", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(coordinatorLayout, getString(R.string.signUpSuccessful), Snackbar.LENGTH_SHORT).show();
 
                 //delay for start activity
                 new Handler().postDelayed(() -> {
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-                    Objects.requireNonNull(getActivity()).finish();
+                    requireActivity().finish();
                 }, LOGIN_SIGN_UP_DELAY);
 
 
@@ -134,20 +134,20 @@ public class SignUpFragment extends Fragment {
                 }
                 // if user enters exist email
                 catch (FirebaseAuthUserCollisionException existEmail) {
-                    Snackbar.make(coordinatorLayout, "You are already signUp. Please login", Snackbar.LENGTH_LONG)
-                            .setAction("OK", view -> {
+                    Snackbar.make(coordinatorLayout, getString(R.string.existEmailSignUp), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.ok), view -> {
                                 SIGN_UP_FRAGMENT = false;
                                 LOGIN_FRAGMENT = true;
                                 Intent intent = new Intent(getContext(), LoginOrSignUpActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
-                                Objects.requireNonNull(getActivity()).finish();
+                                requireActivity().finish();
                             }).show();
                 }
                 // if user enters wrong email.
                 catch (FirebaseAuthWeakPasswordException weakPassword) {
-                    Snackbar.make(coordinatorLayout, "Please choose a strong password", Snackbar.LENGTH_LONG)
-                            .setAction("OK", view -> {
+                    Snackbar.make(coordinatorLayout, getString(R.string.strongPassword), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.ok), view -> {
                                 confirmPassword.setText(null);
                                 password.setText(null);
                                 password.requestFocus();
@@ -155,16 +155,16 @@ public class SignUpFragment extends Fragment {
                 }
                 // if user enters invalid email.
                 catch (FirebaseAuthInvalidCredentialsException invalidEmail) {
-                    Snackbar.make(coordinatorLayout, "The entered email is invalid", Snackbar.LENGTH_LONG)
-                            .setAction("OK", view -> {
+                    Snackbar.make(coordinatorLayout, getString(R.string.invalidEmail), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.ok), view -> {
                                 email.setText(null);
                                 email.requestFocus();
                             }).show();
                 }
                 //signUp failed Try again
                 catch (Exception exception) {
-                    Snackbar.make(coordinatorLayout, Objects.requireNonNull(exception.getMessage()), Snackbar.LENGTH_LONG)
-                            .setAction("OK", view -> {
+                    Snackbar.make(coordinatorLayout, getString(R.string.tryAgain), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.ok), view -> {
                                 name.setText(txtName);
                                 confirmPassword.setText(null);
                                 password.setText(null);

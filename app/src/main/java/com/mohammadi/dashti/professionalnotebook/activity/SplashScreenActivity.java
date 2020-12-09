@@ -1,19 +1,34 @@
 package com.mohammadi.dashti.professionalnotebook.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.mohammadi.dashti.professionalnotebook.R;
-import com.mohammadi.dashti.professionalnotebook.util.Constants;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import com.mohammadi.dashti.professionalnotebook.R;
+
+import java.util.Locale;
+
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.DAY_MODE;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.EDITOR_LANGUAGE;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.EN;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.FA;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.LANGUAGE;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.NIGHT_DAY_MODE;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SHARED_PREFERENCES_LANGUAGE;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.SPLASH_TIME_OUT;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SHARED_PREFERENCES_NIGHT_DAY_MODE;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -30,7 +45,23 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set language
+        SHARED_PREFERENCES_LANGUAGE = getSharedPreferences(LANGUAGE, Context.MODE_PRIVATE);
+        if (SHARED_PREFERENCES_LANGUAGE.getString(LANGUAGE, EN).equals(EN)) {
+            setLocale("en");
+        } else {
+            setLocale("fa");
+        }
         setContentView(R.layout.activity_screen_splash);
+
+        //set theme
+        SHARED_PREFERENCES_NIGHT_DAY_MODE = getSharedPreferences(NIGHT_DAY_MODE, Context.MODE_PRIVATE);
+        if (SHARED_PREFERENCES_NIGHT_DAY_MODE.getString(NIGHT_DAY_MODE, DAY_MODE).equals(DAY_MODE)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
 
         //Animations
         topAnimation = AnimationUtils.loadAnimation(this, R.anim.top_animation);
@@ -68,5 +99,13 @@ public class SplashScreenActivity extends AppCompatActivity {
             finish();
         }, SPLASH_TIME_OUT);
 
+    }
+
+    public void setLocale(String lang) {
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        config.locale = new Locale(lang.toLowerCase());
+        resources.updateConfiguration(config, dm);
     }
 }

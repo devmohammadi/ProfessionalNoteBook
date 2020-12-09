@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">دفترچه یادداشت حرفه ای</string>
+    <string name="note_book">دفترچه یادداشت</string>
+    <string name="fatemeh_mohammadi">فاطمه محمدی</string>
+    <string name="mohadese_dashti">محدثه دشتی</string>
+    <string name="login">ورود</string>
+    <string name="sign_up">ثبت نام</string>
+    <string name="email_address">ایمیل</string>
+    <string name="name">نام</string>
+    <string name="password">رمز عبور</string>
+    <string name="confirm_password">تکرار رمز عبور</string>
+    <string name="professionalnotebook">دفترچه یادداشت حرفه ای</string>
+    <string name="login_with">ورود به حساب</string>
+    <string name="email">ایمیل</string>
+    <string name="sort_by">مرتب سازی</string>
+    <string name="time">13:40  99/8/29</string>
+    <string name="this_is_title_note">این عنوان یادداشت است</string>
+    <string name="descriptionNote">این شرح برای یادداشت است. این شرح برای یادداشت است. این شرح برای یادداشت است. این شرح برای یادداشت است. این شرح برای یادداشت است. این شرح برای یادداشت است. این شرح برای یادداشت است.</string>
+    <string name="select_category">انتخاب دسته بندی</string>
+    <string name="note">یادداشت</string>
+    <string name="cancel">بیخیال</string>
+    <string name="title">عنوان</string>
+    <string name="save">ذخیره</string>
+    <string name="description_for_image_view">توضیحات برای ImageView</string>
+    <string name="titleSave">دفترچه یادداشت حرفه ای</string>
+    <string name="titleCategory">دفترچه یادداشت حرفه ای</string>
+    <string name="titleDelete">حذف یادداشت</string>
+    <string name="messageDelete">آیا می خواهید این یادداشت را حذف کنید؟</string>
+    <string name="messageSave">آیا می خواهید تغییر را برای یادداشت ذخیره کنید؟</string>
+    <string name="yesSave">ذخیره</string>
+    <string name="yesDelete">تایید</string>
+    <string name="noSave">ذخیره نشود</string>
+    <string name="noDelete">خیر</string>
+    <string name="lastmodify">آخرین ویرایش :</string>
+    <string name="last_modify">آخرین ویرایش</string>
+    <string name="logout">خروج از حساب</string>
+    <string name="biography">شرح حال</string>
+    <string name="home">خانه</string>
+    <string name="setting">تنظیمات</string>
+    <string name="category">دسته بندی</string>
+    <string name="account">حساب</string>
+    <string name="empty">این دسته بندی خالی است لطفا یک یادداشت را ایجاد کنید</string>
+    <string name="crete">ایجاد یادداشت</string>
+    <string name="night_mode">حالت تیره</string>
+    <string name="other">دیگر</string>
+    <string name="emptyMessageField">لطفا تمام فیلد ها را پر کنید</string>
+    <string name="ok">باشه</string>
+    <string name="pleaseWait">لطفا صبر کنید ...</string>
+    <string name="noteSaveSuccessful">یادداشت با موفقیت ذخیره شد</string>
+    <string name="updateNoteSuccessful">به روز رسانی یادداشت با موفقیت انجام شد</string>
+
+    <!-- Category -->
+    <string name="Programming">برنامه نویسی</string>
+    <string name="Cleaning">تمیز کاری</string>
+    <string name="Lesson">درس خواندن</string>
+    <string name="Movie">تماشای فیلم</string>
+    <string name="Music">موسیقی</string>
+    <string name="Buy">خرید کردن</string>
+    <string name="Other">دیگر</string>
+
+    <!-- Sort -->
+    <string name="Category">دسته بندی</string>
+    <string name="Title">عنوان</string>
+    <string name="Time">زمان</string>
+    <string name="Newest">جدید ترین</string>
+    <string name="Oldest">قدیمی ترین</string>
+
+    <!-- Login -->
+    <string name="enterInfo">لطفا اطلاعات خواسته شده را پر کنید</string>
+    <string name="loginSuccessful">ورود موفقیت آمیز</string>
+    <string name="invalidEmail">ایمیل وارد شده نامعتبر است</string>
+    <string name="incorrectInfo">اطلاعات وارد شده نادرست است</string>
+    <string name="existEmailLogin">شما قبلاً ثبت نام نکرده اید ، لطفاً ثبت نام کنید</string>
+    <string name="tryAgain">مشکلی وجود دارد لطفا دوباره امتحان کنید</string>
+
+    <!-- SignUp -->
+    <string name="notEqualPass">رمز عبور و تکرار آن برابر نیست</string>
+    <string name="signUpSuccessful">ثبت نام موفقیت آمیز</string>
+    <string name="existEmailSignUp">شما قبلاً ثبت نام کرده اید، لطفا وارد شوید</string>
+    <string name="strongPassword">لطفاً یک رمزعبور قوی انتخاب کنید</string>
+
+    <!-- Preference Titles -->
+    <string name="themeHeader">تم</string>
+    <string name="languageHeader">زبان</string>
+    <string name="feedbackHeader">بازخورد</string>
+    <string name="sendFeedback">بازخورد شما دریافت شد ، ممنون از همراهی شما</string>
+
+    <!-- Theme Preferences -->
+    <string name="theme_title">تنظیم تم</string>
+    <string name="Light_mode">حالت روشن</string>
+    <string name="summaryOff">حالت تیره</string>
+    <string name="summaryOn">حالت روشن</string>
+
+    <!-- Feedback Preferences -->
+    <string name="summaryFeedback">لطفا بازخورد خود را برای ما ارسال کنید</string>
+    <string name="titleFeedback">ارسال بازخورد</string>
+
+    <!-- Language Preferences -->
+    <string name="titleLanguage">تنظیم زبان</string>
+</resources>

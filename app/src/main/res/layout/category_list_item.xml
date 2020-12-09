@@ -8,14 +8,14 @@
     android:layout_marginTop="5dp"
     android:layout_marginEnd="15dp"
     android:layout_marginRight="15dp"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="5dp"
+    android:theme="@style/Theme.ProfessionalNoteBook.MainActivity">
 
     <ImageView
         android:id="@+id/ivImageCategory"
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/categoryprogramming"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

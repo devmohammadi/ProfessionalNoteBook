@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">ProfessionalNoteBook</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="note_book">NOTE BOOK</string>
     <string name="fatemeh_mohammadi">Fatemeh Mohammadi</string>
     <string name="mohadese_dashti">Mohadese Dashti</string>
@@ -43,4 +41,60 @@
     <string name="account">ACCOUNT</string>
     <string name="empty">This Category is Empty Please Crete a note</string>
     <string name="crete">Create Note</string>
+    <string name="night_mode">Night Mode</string>
+    <string name="other">Other</string>
+    <string name="emptyMessageField">please enter all field</string>
+    <string name="ok">OK</string>
+    <string name="pleaseWait">Please Wait ....</string>
+    <string name="noteSaveSuccessful">Note Save Successful</string>
+    <string name="updateNoteSuccessful">Update Note Successful</string>
+
+    <!-- Category -->
+    <string name="Programming">Programming</string>
+    <string name="Cleaning">Cleaning</string>
+    <string name="Lesson">Lesson</string>
+    <string name="Movie">Movie</string>
+    <string name="Music">Music</string>
+    <string name="Buy">Buy</string>
+    <string name="Other">Other</string>
+
+    <!-- Sort -->
+    <string name="Category">Category</string>
+    <string name="Title">Title</string>
+    <string name="Time">Time</string>
+    <string name="Newest">Newest</string>
+    <string name="Oldest">Oldest</string>
+
+    <!-- Login -->
+    <string name="enterInfo">please enter information</string>
+    <string name="loginSuccessful">Login is Successful</string>
+    <string name="invalidEmail">The entered email is invalid</string>
+    <string name="incorrectInfo">The information entered is incorrect</string>
+    <string name="existEmailLogin">You have not signup before, please signup</string>
+    <string name="tryAgain">There is a Problem please try Again</string>
+
+    <!-- SignUp -->
+    <string name="notEqualPass">A password is not equal to confirm password</string>
+    <string name="signUpSuccessful">SignUp is Successful</string>
+    <string name="existEmailSignUp">You are already signUp , Please login</string>
+    <string name="strongPassword">Please choose a strong password</string>
+
+    <!-- Preference Titles -->
+    <string name="themeHeader">Theme</string>
+    <string name="languageHeader">Language</string>
+    <string name="feedbackHeader">Feedback</string>
+
+    <!-- Theme Preferences -->
+    <string name="theme_title">Set Theme</string>
+    <string name="Light_mode">Light Mode</string>
+    <string name="summaryOff">Dark mode</string>
+    <string name="summaryOn">Light mode</string>
+
+    <!-- Feedback Preferences -->
+    <string name="summaryFeedback">Please send us your feedback</string>
+    <string name="titleFeedback">Send feedback</string>
+    <string name="sendFeedback">Your feedback was received, thank you</string>
+
+    <!-- Language Preferences -->
+    <string name="titleLanguage">Set Language</string>
 </resources>

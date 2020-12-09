@@ -74,6 +74,9 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">true</item>
         <item name="android:windowFullscreen">false</item>
+        <item name="fontFamily">@font/poppins_medium</item>
     </style>
+
+
 
 </resources>

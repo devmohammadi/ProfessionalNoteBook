@@ -1,6 +1,13 @@
 package com.mohammadi.dashti.professionalnotebook.util;
 
+
+import android.content.SharedPreferences;
+
 public class Constants {
+    public static  SharedPreferences SHARED_PREFERENCES_NIGHT_DAY_MODE;
+    public static  SharedPreferences.Editor EDITOR_NIGHT_DAY_MODE;
+    public static  SharedPreferences SHARED_PREFERENCES_LANGUAGE;
+    public static  SharedPreferences.Editor EDITOR_LANGUAGE;
     public static final int SPLASH_TIME_OUT = 4000;
     public static final int LOGIN_SIGN_UP_DELAY = 500;
     public static Boolean SIGN_UP_FRAGMENT = true;
@@ -10,9 +17,14 @@ public class Constants {
     public static String TIME = "TIME";
     public static String CATEGORY = "CATEGORY";
     public static String LANGUAGE = "LANGUAGE";
+    public static String EN = "EN";
+    public static String FA = "FA";
     public static String SORT = "SORT";
     public static String OLDEST = "OLDEST";
     public static String NEWEST = "NEWEST";
+    public static String NIGHT_DAY_MODE = "NIGHT_DAY_MODE";
+    public static String DAY_MODE = "DAY_MODE";
+    public static String NIGHT_MODE = "NIGHT_MODE";
     public static String PREFIX_LINK = "https://firebasestorage.googleapis.com/v0/b/professionalnotebook.appspot.com/o/";
     public static String PROGRAMMING = PREFIX_LINK + "category_programming.png?alt=media&token=871e6767-54e5-4649-8602-9fab3f326d9e";
     public static String CLEANING = PREFIX_LINK + "category_cleaning.png?alt=media&token=1389767b-54a9-429d-b36c-0524ef73d087";

@@ -28,5 +28,8 @@
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:navigationBarColor">@color/BackgroundDay</item>
         <item name="android:navigationBarDividerColor">@color/colorDividerDay</item>
+        <item name="fontFamily">@font/poppins_medium</item>
     </style>
+
+
 </resources>

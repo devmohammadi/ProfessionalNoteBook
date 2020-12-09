@@ -10,9 +10,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivAccount"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:orientation="vertical"
@@ -53,6 +53,7 @@
             android:autofillHints=""
             android:background="@null"
             android:ems="10"
+            android:fontFamily="@font/poppins_medium"
             android:hint="@string/name"
             android:inputType="textPersonName"
             android:maxLines="1"
@@ -66,6 +67,7 @@
             android:autofillHints=""
             android:background="@null"
             android:ems="10"
+            android:fontFamily="@font/poppins_medium"
             android:maxLines="1"
             android:padding="10dp"
             android:text="@string/email_address" />
@@ -78,6 +80,7 @@
             android:autofillHints=""
             android:background="@null"
             android:ems="10"
+            android:fontFamily="@font/poppins_medium"
             android:hint="@string/biography"
             android:inputType="textPersonName"
             android:maxLines="5"
@@ -92,9 +95,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="62dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/bg_btn"
         android:clickable="true"
         android:focusable="true"
@@ -102,12 +105,13 @@
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:gravity="center"
         android:padding="10dp"
+        android:paddingBottom="20dp"
         android:text="@string/logout"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout

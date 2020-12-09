@@ -95,7 +95,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/BackgroundNight"
         android:fillViewport="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -128,7 +128,7 @@
             app:tabGravity="center"
             app:tabIconTint="@android:color/darker_gray"
             app:tabIndicator="@null"
-            app:tabMinWidth="40dp"
+            app:tabMinWidth="60dp"
             app:tabMode="scrollable"
             app:tabRippleColor="@null">
 
