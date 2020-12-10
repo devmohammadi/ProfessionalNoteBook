@@ -27,6 +27,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnRecy
     private RecyclerView recyclerViewCategoryItem;
     private CategoryAdapter categoryAdapter;
     private String category;
+    private String finalTxtCategory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,12 +60,30 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnRecy
     public void onClick(Category mCategory) {
         category = mCategory.getTitle();
 
+        if (category.equals(getString(R.string.Programming)))
+            finalTxtCategory = "Programming";
+        else if (category.equals(getString(R.string.Cleaning)))
+            finalTxtCategory = "Cleaning";
+        else if (category.equals(getString(R.string.Lesson)))
+            finalTxtCategory = "Lesson";
+        else if (category.equals(getString(R.string.Movie)))
+            finalTxtCategory = "Movie";
+        else if (category.equals(getString(R.string.Music)))
+            finalTxtCategory = "Music";
+        else if (category.equals(getString(R.string.Buy)))
+            finalTxtCategory = "Buy";
+        else if (category.equals(getString(R.string.Other)))
+            finalTxtCategory = "Other";
+        else
+            finalTxtCategory = "Other";
+
+
         handelFragment(new CategorySelectedFragment());
     }
 
     private void handelFragment(Fragment fragment) {
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.CATEGORY, category);
+        bundle.putString(Constants.CATEGORY, finalTxtCategory);
         fragment.setArguments(bundle);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -140,7 +140,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             else if(txtCategory.equals(getString(R.string.Other)))
                 finalTxtCategory = "Other";
             else
-                finalTxtCategory = txtCategory;
+                finalTxtCategory = "Other";
 
             mRootRef.child(mAuth.getCurrentUser().getUid()).child(noteId).setValue(mapNote)
                     .addOnCompleteListener(task -> {
