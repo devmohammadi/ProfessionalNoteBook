@@ -50,6 +50,7 @@ dependencies {
     //FireBase
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-database:19.5.1'
+    implementation 'com.google.firebase:firebase-storage:19.2.0'
 
     //Persian Date
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
@@ -59,4 +60,7 @@ dependencies {
 
     //RoundedImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //image cropper
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 }

@@ -86,7 +86,31 @@ public class CategorySelectedFragment extends Fragment implements NoteAdapter.On
         }
 
         categoryTitle = view.findViewById(R.id.tvTitleCategory);
-        categoryTitle.setText(category);
+
+
+        switch (category) {
+            case "Programming":
+                categoryTitle.setText(R.string.Programming);
+                break;
+            case "Cleaning":
+                categoryTitle.setText(R.string.Cleaning);
+                break;
+            case "Lesson":
+                categoryTitle.setText(R.string.Lesson);
+                break;
+            case "Movie":
+                categoryTitle.setText(R.string.Movie);
+                break;
+            case "Music":
+                categoryTitle.setText(R.string.Music);
+                break;
+            case "Buy":
+                categoryTitle.setText(R.string.Buy);
+                break;
+            default:
+                categoryTitle.setText(R.string.Other);
+                break;
+        }
 
         recyclerViewCategoryNote = view.findViewById(R.id.rvCategoryNote);
         recyclerViewCategoryNote.setHasFixedSize(true);

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mohammadi.dashti.professionalnotebook">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,9 +15,14 @@
             android:theme="@style/Theme.ProfessionalNoteBook.MainActivity">
         </activity>
 
+
+
         <activity
             android:name=".activity.CreateNoteActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.MainActivity" />
+
+
+
         <activity
             android:name=".activity.LoginOrSignUpActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.LoginSignUp" />
@@ -31,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
 
         <meta-data
             android:name="preloaded_fonts"

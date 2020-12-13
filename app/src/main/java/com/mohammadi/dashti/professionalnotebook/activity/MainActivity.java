@@ -155,11 +155,15 @@ public class MainActivity extends AppCompatActivity {
 
                 name.setText(txtName);
                 email.setText(txtEmail);
-                Picasso.get()
-                        .load(imageUrl)
-                        .placeholder(R.drawable.ic_person)
-                        .error(R.drawable.ic_person)
-                        .into(imageProfile);
+                if (!imageUrl.equals("default")) {
+                    Picasso.get()
+                            .load(imageUrl)
+                            .placeholder(R.drawable.ic_person)
+                            .error(R.drawable.ic_person)
+                            .into(imageProfile);
+                }else {
+                    imageProfile.setImageResource(R.drawable.ic_person);
+                }
             }
 
             @Override

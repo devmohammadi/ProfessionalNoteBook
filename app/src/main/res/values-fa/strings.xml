@@ -48,6 +48,12 @@
     <string name="pleaseWait">لطفا صبر کنید ...</string>
     <string name="noteSaveSuccessful">یادداشت با موفقیت ذخیره شد</string>
     <string name="updateNoteSuccessful">به روز رسانی یادداشت با موفقیت انجام شد</string>
+    <string name="noImageSelected">لطفا یک عکس را انتخاب کنید!</string>
+    <string name="chooseImage">انتخاب عکس</string>
+    <string name="enterName">نام خود را وارد کنید</string>
+    <string name="enterBio">شرح حال خود را وارد کنید</string>
+    <string name="emptyMessage">لطفا فیلد را پرکنید</string>
+    <string name="updateUserSuccessful">بروز رسانی با موفقیت انجام شد</string>
 
     <!-- Category -->
     <string name="Programming">برنامه نویسی</string>

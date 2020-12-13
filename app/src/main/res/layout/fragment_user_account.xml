@@ -73,7 +73,7 @@
             android:text="@string/email_address" />
 
         <EditText
-            android:id="@+id/textMultiLine"
+            android:id="@+id/etBiography"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

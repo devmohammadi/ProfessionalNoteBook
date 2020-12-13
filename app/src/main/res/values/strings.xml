@@ -48,6 +48,12 @@
     <string name="pleaseWait">Please Wait ....</string>
     <string name="noteSaveSuccessful">Note Save Successful</string>
     <string name="updateNoteSuccessful">Update Note Successful</string>
+    <string name="noImageSelected">No Image Selected!</string>
+    <string name="chooseImage">Choose Image</string>
+    <string name="enterName">Enter Name</string>
+    <string name="enterBio">Enter Biography</string>
+    <string name="emptyMessage">please enter field</string>
+    <string name="updateUserSuccessful">Update User Successful</string>
 
     <!-- Category -->
     <string name="Programming">Programming</string>
