@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layoutDirection="rtl"
+    tools:targetApi="jelly_bean_mr1"
     tools:context=".activity.UpdateShowDeleteNoteActivity">
 
     <TextView
@@ -52,7 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:rotation="180"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/ic_back"
         android:fontFamily="@font/poppins_medium"
         app:layout_constraintBottom_toBottomOf="@+id/tvEdit"
@@ -66,9 +69,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:autofillHints=""
         android:background="@null"
@@ -216,10 +218,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:layout_toStartOf="@id/tvTime"
-            android:layout_toLeftOf="@id/tvTime"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/last_modify"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:layout_toLeftOf="@id/tvTime" />
 
 
     </RelativeLayout>

@@ -118,25 +118,29 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/googleplus" />
+                    android:src="@drawable/googleplus"
+                    android:contentDescription="@string/description_for_image_view" />
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/github" />
+                    android:src="@drawable/github"
+                    android:contentDescription="@string/description_for_image_view" />
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/twitter" />
+                    android:src="@drawable/twitter"
+                    android:contentDescription="@string/description_for_image_view" />
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/facebook" />
+                    android:src="@drawable/facebook"
+                    android:contentDescription="@string/description_for_image_view" />
 
 
             </LinearLayout>

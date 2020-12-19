@@ -12,12 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProfessionalNoteBook.MainActivity">
         <activity android:name=".activity.UpdateShowDeleteNoteActivity"
-            android:theme="@style/Theme.ProfessionalNoteBook.MainActivity">
+            android:theme="@style/Theme.ProfessionalNoteBook.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
 
 
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.CreateNoteActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.MainActivity" />
 
@@ -25,11 +27,14 @@
 
         <activity
             android:name=".activity.LoginOrSignUpActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.ProfessionalNoteBook.LoginSignUp" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.MainActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.MainActivity" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.SplashScreenActivity"
             android:theme="@style/Theme.ProfessionalNoteBook.SplashScreen">
             <intent-filter>
@@ -40,7 +45,9 @@
         </activity>
 
 
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+        <activity
+            android:screenOrientation="portrait"
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
 
         <meta-data

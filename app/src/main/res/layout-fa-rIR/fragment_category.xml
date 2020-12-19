@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     android:orientation="vertical"
-    tools:context=".fragment.CategoryFragment">
+    tools:context=".fragment.CategoryFragment"
+    tools:targetApi="jelly_bean_mr1">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

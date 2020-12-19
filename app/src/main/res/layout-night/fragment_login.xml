@@ -38,7 +38,8 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_margin="20dp"
-                android:src="@drawable/useraccount" />
+                android:src="@drawable/useraccount"
+                android:contentDescription="@string/description_for_image_view" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -118,25 +119,29 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/googleplus" />
+                    android:src="@drawable/googleplus"
+                    android:contentDescription="@string/description_for_image_view" />
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/github" />
+                    android:src="@drawable/github"
+                    android:contentDescription="@string/description_for_image_view" />
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/twitter" />
+                    android:src="@drawable/twitter"
+                    android:contentDescription="@string/description_for_image_view" />
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:src="@drawable/facebook" />
+                    android:src="@drawable/facebook"
+                    android:contentDescription="@string/description_for_image_view" />
 
 
             </LinearLayout>

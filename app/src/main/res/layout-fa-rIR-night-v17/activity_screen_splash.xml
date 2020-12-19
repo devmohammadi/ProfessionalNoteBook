@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    tools:context=".activity.SplashScreenActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/vFirstLine"
+            android:layout_width="22dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/one_line" />
+
+        <View
+            android:id="@+id/vSecondLine"
+            android:layout_width="22dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/vFirstLine"
+            android:background="@drawable/three_line" />
+
+        <View
+            android:id="@+id/vThirdLine"
+            android:layout_width="22dp"
+            android:layout_height="280dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/vSecondLine"
+            android:background="@drawable/one_line" />
+
+        <View
+            android:id="@+id/vFourthLine"
+            android:layout_width="22dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/vThirdLine"
+            android:background="@drawable/three_line" />
+
+        <View
+            android:id="@+id/vFifthLine"
+            android:layout_width="22dp"
+            android:layout_height="240dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/vFourthLine"
+            android:background="@drawable/two_line" />
+
+        <View
+            android:id="@+id/vSixthLine"
+            android:layout_width="22dp"
+            android:layout_height="170dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/vFifthLine"
+            android:background="@drawable/one_line" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:id="@+id/tvNoteBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/baloo"
+            android:padding="10dp"
+            android:text="@string/note_book"
+            android:textSize="50sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            tools:ignore="UselessParent">
+
+
+            <TextView
+                android:id="@+id/tvMohammadi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/baloo"
+                android:text="@string/fatemeh_mohammadi"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tvDashti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMohammadi"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/baloo"
+                android:layout_marginBottom="25dp"
+                android:text="@string/mohadese_dashti"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

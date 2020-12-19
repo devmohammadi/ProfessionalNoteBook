@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundDay"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    tools:context=".fragment.HomeFragment">
+
+    <TextView
+        android:id="@+id/tvSortBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:alpha="0.75"
+        android:drawableStart="@drawable/ic_sort"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/baloo"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:text="@string/sort_by"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        app:drawableStartCompat="@drawable/ic_sort"
+        tools:ignore="RtlSymmetry,UseCompatTextViewDrawableXml" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerItemNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/note_item" />
+
+</LinearLayout>

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.CreateNoteActivity">
+    android:layoutDirection="rtl"
+    tools:context=".activity.CreateNoteActivity"
+    tools:targetApi="jelly_bean_mr1">
 
 
     <TextView
@@ -29,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="@string/cancel"
         android:textAllCaps="true"
@@ -37,7 +38,8 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="32dp" />
 
     <TextView
         android:id="@+id/etCategory"

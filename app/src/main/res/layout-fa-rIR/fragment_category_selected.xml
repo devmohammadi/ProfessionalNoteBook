@@ -4,8 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:gravity="start"
+    android:layoutDirection="rtl"
     android:orientation="vertical"
-    tools:context=".fragment.CategorySelectedFragment">
+    android:textAlignment="viewEnd"
+    tools:context=".fragment.CategorySelectedFragment"
+    tools:ignore="RtlCompat"
+    tools:targetApi="jelly_bean_mr1">
 
     <TextView
         android:id="@+id/tvTitleCategory"
@@ -15,7 +22,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/baloo"
+        android:gravity="start"
         android:text="@string/category"
+        android:textAlignment="textStart"
         android:textSize="35sp"
         android:textStyle="bold" />
 
@@ -26,13 +35,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
-        android:visibility="gone"
         android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="@string/empty"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvCreteNote"
@@ -42,10 +51,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="5dp"
-        android:visibility="gone"
         android:text="@string/crete"
         android:textColor="@color/design_default_color_primary"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:visibility="gone" />
 
 
     <androidx.recyclerview.widget.RecyclerView
