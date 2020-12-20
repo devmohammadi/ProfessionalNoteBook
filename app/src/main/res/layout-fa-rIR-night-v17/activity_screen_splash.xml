@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layoutDirection="rtl"
+    android:background="@color/BackgroundNight"
     tools:context=".activity.SplashScreenActivity">
 
     <RelativeLayout

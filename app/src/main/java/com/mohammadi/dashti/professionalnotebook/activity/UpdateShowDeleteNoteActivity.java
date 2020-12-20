@@ -85,31 +85,14 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         String cat = getIntent().getStringExtra(CATEGORY);
-        String finalTxtCategory;
-        if (cat.equals(getString(R.string.Programming)))
-            finalTxtCategory = "Programming";
-        else if (cat.equals(getString(R.string.Cleaning)))
-            finalTxtCategory = "Cleaning";
-        else if (cat.equals(getString(R.string.Lesson)))
-            finalTxtCategory = "Lesson";
-        else if (cat.equals(getString(R.string.Movie)))
-            finalTxtCategory = "Movie";
-        else if (cat.equals(getString(R.string.Music)))
-            finalTxtCategory = "Music";
-        else if (cat.equals(getString(R.string.Buy)))
-            finalTxtCategory = "Buy";
-        else if (cat.equals(getString(R.string.Other)))
-            finalTxtCategory = "Other";
-        else
-            finalTxtCategory = cat;
 
-        mNote = new Note(finalTxtCategory,
+        mNote = new Note(cat,
                 getIntent().getStringExtra(TITLE),
                 getIntent().getStringExtra(NOTE),
                 Long.parseLong(getIntent().getStringExtra(TIME)));
 
 
-        showCategory.setText(mNote.getCategory());
+        showCategory.setText(cat);
         showTitle.setText(mNote.getTitle());
         showNote.setText(mNote.getNote());
 
@@ -263,10 +246,27 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
             Query noteQuery = ref.child("Notes").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                     .orderByChild("time").equalTo(noteUpdate.getTime());
 
-            String finalTxtCategory = txtCategory;
+            String finalTxtCategory;
+            if (txtCategory.equals(getString(R.string.Programming)))
+                finalTxtCategory = "Programming";
+            else if (txtCategory.equals(getString(R.string.Cleaning)))
+                finalTxtCategory = "Cleaning";
+            else if (txtCategory.equals(getString(R.string.Lesson)))
+                finalTxtCategory = "Lesson";
+            else if (txtCategory.equals(getString(R.string.Movie)))
+                finalTxtCategory = "Movie";
+            else if (txtCategory.equals(getString(R.string.Music)))
+                finalTxtCategory = "Music";
+            else if (txtCategory.equals(getString(R.string.Buy)))
+                finalTxtCategory = "Buy";
+            else if (txtCategory.equals(getString(R.string.Other)))
+                finalTxtCategory = "Other";
+            else
+                finalTxtCategory = "Other";
             DatabaseReference categoryQuery = ref.child("Category").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child(noteUpdate.getCategory());
+                    .child(finalTxtCategory);
 
+            String finalTxtCategory1 = txtCategory;
             noteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -277,7 +277,7 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
                                 ref.child("Category").child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
-                                        .child(category.getText().toString()).child(Objects.requireNonNull(snapshot.getKey()))
+                                        .child(finalTxtCategory).child(Objects.requireNonNull(snapshot.getKey()))
                                         .setValue(Objects.requireNonNull(snapshot.getKey()));
                             }
 
@@ -290,7 +290,7 @@ public class UpdateShowDeleteNoteActivity extends AppCompatActivity {
 
                     progressDialog.dismiss();
 
-                    showCategory.setText(finalTxtCategory);
+                    showCategory.setText(finalTxtCategory1);
                     showTitle.setText(txtTitle);
                     showNote.setText(txtNote);
                     PersianDate date = new PersianDate(timeNote);

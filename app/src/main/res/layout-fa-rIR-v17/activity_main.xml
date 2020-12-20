@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layoutDirection="rtl"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    android:background="@color/BackgroundDay">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/BackgroundNight"
+            android:background="@color/BackgroundDay"
             app:contentInsetEnd="0dp"
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
@@ -57,7 +58,7 @@
                         android:includeFontPadding="false"
                         android:maxLines="1"
                         android:text="@string/name"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -95,7 +96,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/BackgroundNight"
+        android:background="@color/BackgroundDay"
         android:fillViewport="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -104,7 +105,7 @@
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/BackgroundNight"
+            android:background="@color/BackgroundDay"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -115,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:background="@color/BackgroundNight"
+        android:background="@color/BackgroundDay"
         android:gravity="center"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">
 
@@ -124,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_gravity="center"
-            android:background="@color/BackgroundNight"
+            android:background="@color/BackgroundDay"
             app:tabGravity="center"
             app:tabIconTint="@android:color/darker_gray"
             app:tabIndicator="@null"

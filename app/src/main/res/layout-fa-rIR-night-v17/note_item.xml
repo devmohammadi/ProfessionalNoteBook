@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:layoutDirection="rtl"
     app:cardCornerRadius="4dp"
+    android:background="@color/BackgroundNight"
     app:cardElevation="2dp">
 
     <LinearLayout

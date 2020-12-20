@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layout_alignParentStart="true"
     android:layout_alignParentLeft="true"
+    android:background="@color/BackgroundDay"
     android:gravity="start"
     android:layoutDirection="rtl"
     android:orientation="vertical"

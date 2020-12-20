@@ -6,6 +6,7 @@
     android:layout_margin="16dp"
     android:orientation="vertical"
     app:cardCornerRadius="4dp"
+    android:background="@color/BackgroundDay"
     app:cardElevation="2dp">
 
     <LinearLayout

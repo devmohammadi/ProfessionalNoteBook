@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,11 +24,19 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.mohammadi.dashti.professionalnotebook.R;
 import com.mohammadi.dashti.professionalnotebook.activity.LoginOrSignUpActivity;
 import com.mohammadi.dashti.professionalnotebook.activity.MainActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.LOGIN_FRAGMENT;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.LOGIN_SIGN_UP_DELAY;
@@ -36,7 +47,7 @@ public class LoginFragment extends Fragment {
 
     private TextInputEditText email;
     private TextInputEditText password;
-
+    private CircleImageView imageProfile;
 
     private CoordinatorLayout coordinatorLayout;
 
@@ -53,13 +64,13 @@ public class LoginFragment extends Fragment {
 
         email = view.findViewById(R.id.etEmail);
         password = view.findViewById(R.id.etPassword);
+        imageProfile = view.findViewById(R.id.ivImageProfile);
         TextView login = view.findViewById(R.id.tvLogin);
         coordinatorLayout = view.findViewById(R.id.clView);
 
         mAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(getContext());
-
 
         login.setOnClickListener(viewLogin -> {
             String txt_email = Objects.requireNonNull(email.getText()).toString().trim();
@@ -75,7 +86,54 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                uploadImageUser(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         return view;
+    }
+
+    private void uploadImageUser(String s) {
+        Query query = FirebaseDatabase.getInstance().getReference().child("Users")
+                .orderByChild("email").startAt(s).endAt(s + "\uf8ff");
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String imageUrl = Objects.requireNonNull(snapshot.child("imageUrl").getValue()).toString();
+                    Log.i(imageUrl, "onDataChange: ");
+                    if (!imageUrl.equals("default")) {
+                        Picasso.get()
+                                .load(imageUrl)
+                                .placeholder(R.drawable.useraccount)
+                                .error(R.drawable.useraccount)
+                                .into(imageProfile);
+                    } else {
+                        imageProfile.setImageResource(R.drawable.useraccount);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

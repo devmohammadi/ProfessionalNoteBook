@@ -6,6 +6,7 @@
     android:layoutDirection="rtl"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity"
+    android:background="@color/BackgroundNight"
     tools:targetApi="jelly_bean_mr1">
 
     <com.google.android.material.appbar.AppBarLayout

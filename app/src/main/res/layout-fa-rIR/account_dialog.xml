@@ -9,6 +9,7 @@
     android:layoutDirection="rtl"
     app:cardCornerRadius="4dp"
     app:cardElevation="2dp"
+    android:background="@color/BackgroundDay"
     tools:targetApi="jelly_bean_mr1">
 
     <LinearLayout

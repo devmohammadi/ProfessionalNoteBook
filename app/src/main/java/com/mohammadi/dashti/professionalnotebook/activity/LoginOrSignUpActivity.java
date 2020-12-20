@@ -1,10 +1,12 @@
 package com.mohammadi.dashti.professionalnotebook.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,7 +19,10 @@ import com.mohammadi.dashti.professionalnotebook.R;
 import com.mohammadi.dashti.professionalnotebook.fragment.LoginFragment;
 import com.mohammadi.dashti.professionalnotebook.fragment.SignUpFragment;
 
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.DAY_MODE;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.LOGIN_FRAGMENT;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.NIGHT_DAY_MODE;
+import static com.mohammadi.dashti.professionalnotebook.util.Constants.SHARED_PREFERENCES_NIGHT_DAY_MODE;
 import static com.mohammadi.dashti.professionalnotebook.util.Constants.SIGN_UP_FRAGMENT;
 
 public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -39,16 +44,17 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
         login = findViewById(R.id.tvLogin);
         frameLayout = findViewById(R.id.flContainer);
 
+        SHARED_PREFERENCES_NIGHT_DAY_MODE = getSharedPreferences(NIGHT_DAY_MODE, Context.MODE_PRIVATE);
 
         if (SIGN_UP_FRAGMENT) {
-            signUp.setTextColor(Color.BLACK);
+            setColorSignUp();
             login.setTextColor(Color.GRAY);
             login.setTextSize(15);
             handelFragmentSignUp(new SignUpFragment());
         }
         if (LOGIN_FRAGMENT) {
             signUp.setTextColor(Color.GRAY);
-            login.setTextColor(Color.BLACK);
+            setColorLogin();
             signUp.setTextSize(15);
             handelFragmentLogin(new LoginFragment());
         }
@@ -56,6 +62,24 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
         signUp.setOnClickListener(this);
         login.setOnClickListener(this);
 
+    }
+
+    //set color
+    private void setColorSignUp() {
+        if (SHARED_PREFERENCES_NIGHT_DAY_MODE.getString(NIGHT_DAY_MODE, DAY_MODE).equals(DAY_MODE)) {
+            signUp.setTextColor(Color.BLACK);
+        } else {
+            signUp.setTextColor(Color.WHITE);
+        }
+    }
+
+    //set color
+    private void setColorLogin() {
+        if (SHARED_PREFERENCES_NIGHT_DAY_MODE.getString(NIGHT_DAY_MODE, DAY_MODE).equals(DAY_MODE)) {
+            login.setTextColor(Color.BLACK);
+        } else {
+            login.setTextColor(Color.WHITE);
+        }
     }
 
     private void handelFragmentSignUp(SignUpFragment signUpFragment) {
@@ -85,8 +109,7 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tvSignUp:
-
-                signUp.setTextColor(Color.BLACK);
+                setColorSignUp();
                 login.setTextColor(Color.GRAY);
                 login.setTextSize(15);
                 signUp.setTextSize(35);
@@ -99,7 +122,7 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
 
             case R.id.tvLogin:
                 signUp.setTextColor(Color.GRAY);
-                login.setTextColor(Color.BLACK);
+               setColorLogin();
                 login.setTextSize(35);
                 signUp.setTextSize(15);
                 fragment = new LoginFragment();
@@ -107,7 +130,6 @@ public class LoginOrSignUpActivity extends AppCompatActivity implements View.OnC
                 fragmentTransaction.replace(R.id.flContainer, fragment);
                 fragmentTransaction.commit();
                 break;
-
 
         }
 
